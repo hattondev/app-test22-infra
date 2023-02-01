@@ -1,0 +1,22 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: app-test22-vs
+  labels:
+    app: app-test22
+    version: 0.0.1
+    backstage.io/kubernetes-id: app-test22
+spec:
+  gateways:
+  - istio-gateway/apps-gateway
+  hosts:
+  - app-test22.apps.wwtlab.net
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: app-test22-svc
+        port:
+          number: 80
+      weight: 100
